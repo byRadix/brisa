@@ -9,6 +9,10 @@ import RegisterPage from './pages/auth/RegisterPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
+import MyListingsPage from './pages/dashboard/MyListingsPage';
+import MessagesPage from './pages/dashboard/MessagesPage';
+import ReviewsPage from './pages/dashboard/ReviewsPage';
+import StatsPage from './pages/dashboard/StatsPage';
 import MarketplacePage from './pages/marketplace/MarketplacePage';
 import ListingDetailPage from './pages/marketplace/ListingDetailPage';
 import CreateListingPage from './pages/marketplace/CreateListingPage';
@@ -62,7 +66,11 @@ function App() {
       }>
         <Route index element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="listings" element={<MyListingsPage />} />
         <Route path="create-listing" element={<CreateListingPage />} />
+        <Route path="messages" element={<MessagesPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+        <Route path="stats" element={<StatsPage />} />
       </Route>
       
       {/* 404 route */}

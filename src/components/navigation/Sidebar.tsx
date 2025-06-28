@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
     { name: 'Mis Anuncios', path: '/dashboard/listings', icon: <FileText size={20} /> },
     { name: 'Crear Anuncio', path: '/dashboard/create-listing', icon: <PlusCircle size={20} /> },
     { name: 'Mensajes', path: '/dashboard/messages', icon: <MessageSquare size={20} /> },
-    { name: 'Valoraciones', path: '/dashboard/ratings', icon: <Star size={20} /> },
+    { name: 'Valoraciones', path: '/dashboard/reviews', icon: <Star size={20} /> },
     { name: 'Estadísticas', path: '/dashboard/stats', icon: <BarChart size={20} /> },
     { name: 'Configuración', path: '/dashboard/settings', icon: <Settings size={20} /> },
   ];
