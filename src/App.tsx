@@ -21,6 +21,7 @@ import CreateListingPage from './pages/marketplace/CreateListingPage';
 import ContestsPage from './pages/contests/ContestsPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
 import AboutPage from './pages/about/AboutPage';
+import AdsPage from './pages/ads/AdsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Layout components
@@ -58,6 +59,7 @@ function App() {
         <Route path="contests" element={<ContestsPage />} />
         <Route path="categories" element={<CategoriesPage />} />
         <Route path="about" element={<AboutPage />} />
+        <Route path="ads" element={<AdsPage />} />
       </Route>
       
       {/* Protected routes */}
