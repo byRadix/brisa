@@ -2,18 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, User, LogOut, Search, Menu as MenuIcon, Bell, Settings } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNotifications } from '../../contexts/NotificationContext';
 import Button from '../ui/Button';
 import Logo from '../ui/Logo';
+import SearchModal from '../search/SearchModal';
+import NotificationDropdown from '../notifications/NotificationDropdown';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
+  const { unreadCount } = useNotifications();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProfileMenu = () => setIsProfileMenuOpen(!isProfileMenuOpen);
+  const toggleSearchModal = () => setIsSearchModalOpen(!isSearchModalOpen);
+  const toggleNotificationDropdown = () => setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
 
   // Handle scroll effect
   useEffect(() => {
@@ -35,10 +43,33 @@ const Header: React.FC = () => {
       if (!target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
         setIsMenuOpen(false);
       }
+      if (!target.closest('.notification-dropdown') && !target.closest('.notification-button')) {
+        setIsNotificationDropdownOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Ctrl/Cmd + K to open search
+      if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+        event.preventDefault();
+        setIsSearchModalOpen(true);
+      }
+      // Escape to close modals
+      if (event.key === 'Escape') {
+        setIsSearchModalOpen(false);
+        setIsNotificationDropdownOpen(false);
+        setIsProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const handleSignOut = async () => {
@@ -57,7 +88,7 @@ const Header: React.FC = () => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100' 
             : 'bg-white/80 backdrop-blur-sm'
@@ -92,15 +123,37 @@ const Header: React.FC = () => {
               {user ? (
                 <>
                   {/* Search Button */}
-                  <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                  <button 
+                    onClick={toggleSearchModal}
+                    className="flex items-center space-x-2 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200 group"
+                    title="Buscar (Ctrl+K)"
+                  >
                     <Search size={20} />
+                    <span className="hidden xl:block text-sm text-gray-400">Ctrl+K</span>
                   </button>
 
                   {/* Notifications */}
-                  <button className="relative p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200">
-                    <Bell size={20} />
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                  </button>
+                  <div className="relative">
+                    <button 
+                      onClick={toggleNotificationDropdown}
+                      className="notification-button relative p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                      title="Notificaciones"
+                    >
+                      <Bell size={20} />
+                      {unreadCount > 0 && (
+                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-medium animate-pulse">
+                          {unreadCount > 9 ? '9+' : unreadCount}
+                        </span>
+                      )}
+                    </button>
+
+                    <div className="notification-dropdown">
+                      <NotificationDropdown 
+                        isOpen={isNotificationDropdownOpen}
+                        onClose={() => setIsNotificationDropdownOpen(false)}
+                      />
+                    </div>
+                  </div>
 
                   {/* Profile Menu */}
                   <div className="relative">
@@ -158,6 +211,15 @@ const Header: React.FC = () => {
                 </>
               ) : (
                 <div className="flex items-center space-x-3">
+                  {/* Search for non-authenticated users */}
+                  <button 
+                    onClick={toggleSearchModal}
+                    className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                    title="Buscar"
+                  >
+                    <Search size={20} />
+                  </button>
+                  
                   <Link to="/login">
                     <Button 
                       variant="ghost" 
@@ -194,6 +256,18 @@ const Header: React.FC = () => {
           <div className="mobile-menu lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg">
             <div className="container mx-auto px-4 py-4">
               <nav className="space-y-1">
+                {/* Search in mobile menu */}
+                <button
+                  onClick={() => {
+                    toggleSearchModal();
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center w-full px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
+                >
+                  <Search size={18} className="mr-3" />
+                  Buscar
+                </button>
+
                 {navigationItems.map((item) => (
                   <Link 
                     key={item.name}
@@ -207,6 +281,23 @@ const Header: React.FC = () => {
 
                 {user ? (
                   <div className="pt-4 border-t border-gray-100 space-y-1">
+                    {/* Notifications in mobile */}
+                    <button
+                      onClick={() => {
+                        toggleNotificationDropdown();
+                        setIsMenuOpen(false);
+                      }}
+                      className="flex items-center w-full px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
+                    >
+                      <Bell size={18} className="mr-3" />
+                      Notificaciones
+                      {unreadCount > 0 && (
+                        <span className="ml-auto w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                          {unreadCount > 9 ? '9+' : unreadCount}
+                        </span>
+                      )}
+                    </button>
+
                     <Link 
                       to="/dashboard" 
                       className="flex items-center px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
@@ -271,6 +362,12 @@ const Header: React.FC = () => {
 
       {/* Spacer to prevent content from hiding behind fixed header */}
       <div className="h-16 lg:h-18"></div>
+
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+      />
     </>
   );
 };

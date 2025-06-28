@@ -4,14 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
 import { AuthProvider } from './contexts/AuthContext';
+import { SearchProvider } from './contexts/SearchContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 import { Toaster } from 'react-hot-toast';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
-        <Toaster position="top-right" />
+        <SearchProvider>
+          <NotificationProvider>
+            <App />
+            <Toaster position="top-right" />
+          </NotificationProvider>
+        </SearchProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>
