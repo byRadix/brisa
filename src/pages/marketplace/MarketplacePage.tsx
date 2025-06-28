@@ -5,7 +5,6 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../../components/ui/Button';
 import ListingCard from '../../components/marketplace/ListingCard';
 import CreateListingModal from '../../components/marketplace/CreateListingModal';
-import MarketplaceAd from '../../components/ads/MarketplaceAd';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface Listing {
@@ -218,11 +217,6 @@ const MarketplacePage: React.FC = () => {
           </Button>
         )}
       </div>
-
-      {/* Anuncio Destacado */}
-      <div className="mb-8">
-        <MarketplaceAd type="featured" />
-      </div>
       
       {/* Search and Filter Bar */}
       <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
@@ -360,59 +354,33 @@ const MarketplacePage: React.FC = () => {
         </div>
       </div>
       
-      {/* Main Content Layout */}
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Listings Grid */}
-        <div className="flex-1">
-          {isLoading ? (
-            <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-            </div>
-          ) : (
-            <>
-              {listings.length === 0 ? (
-                <div className="text-center py-16">
-                  <h3 className="text-xl font-medium text-gray-800 mb-2">No se encontraron resultados</h3>
-                  <p className="text-gray-600 mb-6">Intenta con diferentes términos de búsqueda o filtros</p>
-                  <Button 
-                    variant="outline"
-                    onClick={clearFilters}
-                  >
-                    Limpiar filtros
-                  </Button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {listings.map((listing) => (
-                    <ListingCard key={listing.id} listing={listing} />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
+      {/* Listings Grid */}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
-
-        {/* Sidebar con anuncio */}
-        <div className="lg:w-80">
-          <div className="sticky top-24">
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Servicio Destacado</h3>
-              <MarketplaceAd type="sidebar" />
-            </div>
-            
-            {/* Información adicional */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">¿Necesitas ayuda?</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Nuestro equipo está aquí para ayudarte a encontrar el freelancer perfecto para tu proyecto.
-              </p>
-              <Button variant="outline" fullWidth>
-                Contactar Soporte
+      ) : (
+        <>
+          {listings.length === 0 ? (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-medium text-gray-800 mb-2">No se encontraron resultados</h3>
+              <p className="text-gray-600 mb-6">Intenta con diferentes términos de búsqueda o filtros</p>
+              <Button 
+                variant="outline"
+                onClick={clearFilters}
+              >
+                Limpiar filtros
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {listings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))}
+            </div>
+          )}
+        </>
+      )}
 
       {/* Create Listing Modal */}
       <CreateListingModal
