@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, X, Clock, Trending, Hash, FileText, User } from 'lucide-react';
+import { Search, X, Clock, TrendingUp as Trending, Hash, FileText, User } from 'lucide-react';
 import { useSearch } from '../../contexts/SearchContext';
 
 interface SearchModalProps {
