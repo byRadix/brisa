@@ -1,4 +1,4 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="leftGradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
@@ -15,11 +15,11 @@
   </defs>
   
   <!-- Left vertical element -->
-  <path d="M5 3 L8 3 L11 27 L8 29 Z" fill="url(#leftGradient)" />
+  <path d="M15 10 L25 10 L35 85 L25 90 Z" fill="url(#leftGradient)" />
   
   <!-- Right top curved element -->
-  <path d="M13 5 Q24 5 24 11 Q24 14 21 16 L14 16 Q11 14 11 11 Q11 8 13 5 Z" fill="url(#rightTopGradient)" />
+  <path d="M40 15 Q75 15 75 35 Q75 45 65 50 L45 50 Q35 45 35 35 Q35 25 40 15 Z" fill="url(#rightTopGradient)" />
   
   <!-- Right bottom curved element -->
-  <path d="M13 18 Q24 18 24 24 Q24 27 21 29 L14 29 Q11 27 11 24 Q11 21 13 18 Z" fill="url(#rightBottomGradient)" />
+  <path d="M40 55 Q75 55 75 75 Q75 85 65 90 L45 90 Q35 85 35 75 Q35 65 40 55 Z" fill="url(#rightBottomGradient)" />
 </svg>
