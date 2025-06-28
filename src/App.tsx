@@ -22,6 +22,7 @@ import ContestsPage from './pages/contests/ContestsPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
 import AboutPage from './pages/about/AboutPage';
 import AdsPage from './pages/ads/AdsPage';
+import BriisaAdsPage from './pages/ads/BriisaAdsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Layout components
@@ -60,6 +61,7 @@ function App() {
         <Route path="categories" element={<CategoriesPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="ads" element={<AdsPage />} />
+        <Route path="briisa-ads" element={<BriisaAdsPage />} />
       </Route>
       
       {/* Protected routes */}
