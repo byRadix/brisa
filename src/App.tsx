@@ -13,6 +13,7 @@ import MyListingsPage from './pages/dashboard/MyListingsPage';
 import MessagesPage from './pages/dashboard/MessagesPage';
 import ReviewsPage from './pages/dashboard/ReviewsPage';
 import StatsPage from './pages/dashboard/StatsPage';
+import SettingsPage from './pages/dashboard/SettingsPage';
 import MarketplacePage from './pages/marketplace/MarketplacePage';
 import ListingDetailPage from './pages/marketplace/ListingDetailPage';
 import CreateListingPage from './pages/marketplace/CreateListingPage';
@@ -71,6 +72,7 @@ function App() {
         <Route path="messages" element={<MessagesPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="stats" element={<StatsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
       
       {/* 404 route */}
