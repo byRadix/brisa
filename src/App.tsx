@@ -19,6 +19,7 @@ import MarketplacePage from './pages/marketplace/MarketplacePage';
 import ListingDetailPage from './pages/marketplace/ListingDetailPage';
 import CreateListingPage from './pages/marketplace/CreateListingPage';
 import SampleListingsPage from './pages/marketplace/SampleListingsPage';
+import SamplePublicationsPage from './pages/marketplace/SamplePublicationsPage';
 import ExternalAdsPage from './pages/external-ads/ExternalAdsPage';
 import ContestsPage from './pages/contests/ContestsPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
@@ -30,6 +31,7 @@ import NotFoundPage from './pages/NotFoundPage';
 // Layout components
 import MainLayout from './components/layouts/MainLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
+import SamplePublicationDetail from './components/marketplace/SamplePublicationDetail';
 
 // Protected route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -60,6 +62,8 @@ function App() {
         <Route path="marketplace" element={<MarketplacePage />} />
         <Route path="marketplace/:id" element={<ListingDetailPage />} />
         <Route path="marketplace/examples" element={<SampleListingsPage />} />
+        <Route path="marketplace/sample-publications" element={<SamplePublicationsPage />} />
+        <Route path="marketplace/sample/:id" element={<SamplePublicationDetail />} />
         <Route path="external-ads" element={<ExternalAdsPage />} />
         <Route path="contests" element={<ContestsPage />} />
         <Route path="categories" element={<CategoriesPage />} />
