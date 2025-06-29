@@ -18,6 +18,7 @@ import NotificationsPage from './pages/dashboard/NotificationsPage';
 import MarketplacePage from './pages/marketplace/MarketplacePage';
 import ListingDetailPage from './pages/marketplace/ListingDetailPage';
 import CreateListingPage from './pages/marketplace/CreateListingPage';
+import SampleListingsPage from './pages/marketplace/SampleListingsPage';
 import ContestsPage from './pages/contests/ContestsPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
 import AboutPage from './pages/about/AboutPage';
@@ -57,6 +58,7 @@ function App() {
         <Route path="forgot-password" element={<ForgotPasswordPage />} />
         <Route path="marketplace" element={<MarketplacePage />} />
         <Route path="marketplace/:id" element={<ListingDetailPage />} />
+        <Route path="marketplace/examples" element={<SampleListingsPage />} />
         <Route path="contests" element={<ContestsPage />} />
         <Route path="categories" element={<CategoriesPage />} />
         <Route path="about" element={<AboutPage />} />
