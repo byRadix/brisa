@@ -3,8 +3,8 @@ import { ExternalAd, ExternalAdResponse } from '../types/externalAds';
 // Mock external database service
 // In a real implementation, this would connect to your external database
 class ExternalAdsService {
-  private baseUrl = process.env.VITE_EXTERNAL_DB_URL || 'https://api.external-ads.com';
-  private apiKey = process.env.VITE_EXTERNAL_DB_API_KEY || 'mock-api-key';
+  private baseUrl = import.meta.env.VITE_EXTERNAL_DB_URL || 'https://api.external-ads.com';
+  private apiKey = import.meta.env.VITE_EXTERNAL_DB_API_KEY || 'mock-api-key';
 
   // Mock data for demonstration
   private mockAds: ExternalAd[] = [
