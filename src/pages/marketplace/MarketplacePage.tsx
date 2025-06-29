@@ -5,7 +5,9 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../../components/ui/Button';
 import ListingCard from '../../components/marketplace/ListingCard';
 import CreateListingModal from '../../components/marketplace/CreateListingModal';
+import SamplePublicationCard from '../../components/marketplace/SamplePublicationCard';
 import { useAuth } from '../../contexts/AuthContext';
+import { samplePublications } from '../../data/samplePublications';
 
 interface Listing {
   id: string;
@@ -46,7 +48,9 @@ const MarketplacePage: React.FC = () => {
     'Música & Audio',
     'Programación & Tecnología',
     'Negocios',
-    'Estilo de Vida'
+    'Estilo de Vida',
+    'Electrónicos',
+    'Deportes'
   ];
   
   // Sorting options
@@ -65,7 +69,7 @@ const MarketplacePage: React.FC = () => {
   const fetchListings = async () => {
     setIsLoading(true);
     try {
-      // First, fetch the listings
+      // First, fetch the listings from database
       let query = supabase
         .from('listings')
         .select('*')
@@ -132,6 +136,51 @@ const MarketplacePage: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  // Filter sample publications based on search and category
+  const getFilteredSamplePublications = () => {
+    let filtered = samplePublications;
+
+    // Apply search filter
+    const search = searchParams.get('q');
+    if (search) {
+      filtered = filtered.filter(pub => 
+        pub.title.toLowerCase().includes(search.toLowerCase()) ||
+        pub.description.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // Apply category filter
+    const category = searchParams.get('category');
+    if (category && category !== 'Todas') {
+      filtered = filtered.filter(pub => pub.category === category);
+    }
+
+    // Apply price filter
+    const minPrice = searchParams.get('min_price');
+    const maxPrice = searchParams.get('max_price');
+    if (minPrice || maxPrice) {
+      filtered = filtered.filter(pub => {
+        const price = pub.price;
+        const min = minPrice ? parseFloat(minPrice) : 0;
+        const max = maxPrice ? parseFloat(maxPrice) : Infinity;
+        return price >= min && price <= max;
+      });
+    }
+
+    // Apply sorting
+    const sort = searchParams.get('sort') || 'recent';
+    if (sort === 'price_asc') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sort === 'price_desc') {
+      filtered.sort((a, b) => b.price - a.price);
+    } else {
+      // Default: most recent (by datePosted)
+      filtered.sort((a, b) => new Date(b.datePosted).getTime() - new Date(a.datePosted).getTime());
+    }
+
+    return filtered;
+  };
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -197,6 +246,12 @@ const MarketplacePage: React.FC = () => {
     setPriceRange({ min: '', max: '' });
     setSearchParams({});
   };
+
+  // Get filtered sample publications
+  const filteredSamplePublications = getFilteredSamplePublications();
+  
+  // Combine real listings with sample publications for display
+  const totalResults = listings.length + filteredSamplePublications.length;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -336,7 +391,7 @@ const MarketplacePage: React.FC = () => {
         <p className="text-gray-600">
           {isLoading 
             ? 'Cargando resultados...' 
-            : `Mostrando ${listings.length} resultados`}
+            : `Mostrando ${totalResults} resultados`}
         </p>
         
         <div className="flex items-center space-x-2">
@@ -361,7 +416,7 @@ const MarketplacePage: React.FC = () => {
         </div>
       ) : (
         <>
-          {listings.length === 0 ? (
+          {totalResults === 0 ? (
             <div className="text-center py-16">
               <h3 className="text-xl font-medium text-gray-800 mb-2">No se encontraron resultados</h3>
               <p className="text-gray-600 mb-6">Intenta con diferentes términos de búsqueda o filtros</p>
@@ -373,10 +428,46 @@ const MarketplacePage: React.FC = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
-              ))}
+            <div className="space-y-8">
+              {/* Sample Publications Section */}
+              {filteredSamplePublications.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      Publicaciones Destacadas
+                    </h2>
+                    <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
+                      EJEMPLOS
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredSamplePublications.map((publication) => (
+                      <SamplePublicationCard key={publication.id} publication={publication} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Real Listings Section */}
+              {listings.length > 0 && (
+                <div>
+                  {filteredSamplePublications.length > 0 && (
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-semibold text-gray-800">
+                        Servicios Profesionales
+                      </h2>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
+                        REALES
+                      </span>
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {listings.map((listing) => (
+                      <ListingCard key={listing.id} listing={listing} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </>
