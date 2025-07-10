@@ -56,19 +56,19 @@ export const samplePublications: SamplePublication[] = [
   },
   {
     id: "pub003", 
-    title: "Necesito 2 personas para tirar una pared",
-    description: "Necesito que me ayuden a tirar una pared y recoger los escombrosBicicleta MTB talla M, frenos hidráulicos, suspensión RockShox. Uso recreativo de 6 meses. Perfecta para trails y montaña, muy bien cuidada. Incluye luces LED, computadora de ciclismo y bomba de aire. Ideal para ciclistas intermedios que buscan calidad y rendimiento.",
-    price: 200,
-    category: "Construcción",
+    title: "Necesito 1 camarero y 1 cocinero para un cumpleaños",
+    description: "Necesito un camarero y una persona para que este encargada de la barbacoa y de hacer pizzas en el horno de la foto me ayuden como camareros y a la barbacoa, seria para el domingo7/7 de 18 a 24 horas .",
+    price: 100,
+    category: "Celebraciones",
     condition: "Urgente",
     location: "Lorca",
     images: [
-      "https://media.istockphoto.com/id/1345113252/es/foto/trabajador-usando-martillo.jpg?s=612x612&w=0&k=20&c=yA7nezIA_ZYUaTu8QhwXaIfRE-qdIYFNoVqciKa64eU=",
-      "https://media.istockphoto.com/id/1345113252/es/foto/trabajador-usando-martillo.jpg?s=612x612&w=0&k=20&c=yA7nezIA_ZYUaTu8QhwXaIfRE-qdIYFNoVqciKa64eU="
+      "https://www.globalmarketingdirecto.com/images/2019/HOSTELERIA.jpg",
+      "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202502/21/00119860002658____4__1200x1200.jpg"
     ],
     seller: {
       id: "user666",
-      name: "Juan Pérez",
+      name: "Fran Navarro",
       rating: 4.9
     },
     datePosted: "2024-01-16"
