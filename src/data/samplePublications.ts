@@ -53,7 +53,27 @@ export const samplePublications: SamplePublication[] = [
       rating: 4.9
     },
     datePosted: "2024-01-14"
-  }
+  },
+  {
+    id: "pub003", 
+    title: "Necesito 2 personas para tirar una pared",
+    description: "Necesito que me ayuden a tirar una pared y recoger los escombrosBicicleta MTB talla M, frenos hidráulicos, suspensión RockShox. Uso recreativo de 6 meses. Perfecta para trails y montaña, muy bien cuidada. Incluye luces LED, computadora de ciclismo y bomba de aire. Ideal para ciclistas intermedios que buscan calidad y rendimiento.",
+    price: 200,
+    category: "Construcción",
+    condition: "Urgente",
+    location: "Lorca",
+    images: [
+      "https://media.istockphoto.com/id/1345113252/es/foto/trabajador-usando-martillo.jpg?s=612x612&w=0&k=20&c=yA7nezIA_ZYUaTu8QhwXaIfRE-qdIYFNoVqciKa64eU=",
+      "https://media.istockphoto.com/id/1345113252/es/foto/trabajador-usando-martillo.jpg?s=612x612&w=0&k=20&c=yA7nezIA_ZYUaTu8QhwXaIfRE-qdIYFNoVqciKa64eU="
+    ],
+    seller: {
+      id: "user666",
+      name: "Juan Pérez",
+      rating: 4.9
+    },
+    datePosted: "2024-01-16"
+  },
+
 ];
 
 export const getSamplePublicationById = (id: string): SamplePublication | undefined => {
