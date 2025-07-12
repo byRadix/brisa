@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { getSamplePublicationById } from '../../data/samplePublications';
 import Button from '../ui/Button';
+import PublicationMapView from '../ui/PublicationMapView';
 
 const SamplePublicationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -283,6 +284,18 @@ const SamplePublicationDetail: React.FC = () => {
                   <p className="text-gray-700 leading-relaxed">
                     {publication.description}
                   </p>
+                </div>
+
+                {/* Location Map */}
+                <div className="mb-6">
+                  <h2 className="text-lg font-semibold mb-3">Ubicación</h2>
+                  <PublicationMapView
+                    coordinates={publication.coordinates}
+                    title={publication.title}
+                    location={publication.location}
+                    height="300px"
+                    className="w-full"
+                  />
                 </div>
 
                 {/* Product Details */}

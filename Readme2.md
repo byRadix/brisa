@@ -1,5 +1,3 @@
-Que hace la carpeta .bolt ?
-
 La carpeta public es donde estan los svg de los logos y la imagen de la cabecera
 La carpeta src es donde esta todo el codigo del proyecto
 - Dentro en assets esta la carpeta de imagenes

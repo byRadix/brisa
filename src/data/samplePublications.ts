@@ -6,6 +6,10 @@ export interface SamplePublication {
   category: string;
   condition: string;
   location: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
   images: string[];
   seller: {
     id: string;
@@ -24,6 +28,10 @@ export const samplePublications: SamplePublication[] = [
     category: "Electrónicos",
     condition: "Usado - Como nuevo",
     location: "Ciudad de México",
+    coordinates: {
+      latitude: 19.4326,
+      longitude: -99.1332
+    },
     images: [
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -43,6 +51,10 @@ export const samplePublications: SamplePublication[] = [
     category: "Deportes",
     condition: "Usado - Buen estado",
     location: "Guadalajara",
+    coordinates: {
+      latitude: 20.6597,
+      longitude: -103.3496
+    },
     images: [
       "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -62,6 +74,10 @@ export const samplePublications: SamplePublication[] = [
     category: "Celebraciones",
     condition: "Urgente",
     location: "Lorca",
+    coordinates: {
+      latitude: 37.6711,
+      longitude: -1.7017
+    },
     images: [
       "https://www.globalmarketingdirecto.com/images/2019/HOSTELERIA.jpg",
       "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202502/21/00119860002658____4__1200x1200.jpg"

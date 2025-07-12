@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Star, Calendar, Tag } from 'lucide-react';
+import { MapPin, Star, Calendar } from 'lucide-react';
 import { SamplePublication } from '../../data/samplePublications';
+import PublicationMapThumbnail from '../ui/PublicationMapThumbnail';
 
 interface SamplePublicationCardProps {
   publication: SamplePublication;
@@ -81,6 +82,15 @@ const SamplePublicationCard: React.FC<SamplePublicationCardProps> = ({
             <Calendar size={14} className="mr-1" />
             <span>{formatDate(publication.datePosted)}</span>
           </div>
+        </div>
+
+        {/* Map Thumbnail */}
+        <div className="mb-4">
+          <PublicationMapThumbnail
+            coordinates={publication.coordinates}
+            height="100px"
+            className="w-full"
+          />
         </div>
 
         {/* Seller Info */}
