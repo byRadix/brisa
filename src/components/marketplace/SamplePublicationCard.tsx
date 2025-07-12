@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { MapPin, Star, Calendar } from 'lucide-react';
 import { SamplePublication } from '../../data/samplePublications';
 import PublicationMapThumbnail from '../ui/PublicationMapThumbnail';
+import ModalityBadge from '../ui/ModalityBadge';
+import RemoteWorkInfo from '../ui/RemoteWorkInfo';
 
 interface SamplePublicationCardProps {
   publication: SamplePublication;
@@ -47,6 +49,7 @@ const SamplePublicationCard: React.FC<SamplePublicationCardProps> = ({
           <span className={`text-xs px-2 py-1 rounded-full font-medium ${getConditionColor(publication.condition)}`}>
             {publication.condition}
           </span>
+          <ModalityBadge modality={publication.modality} size="sm" />
         </div>
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg">
           <span className="text-xs font-medium text-gray-800">EJEMPLO</span>
@@ -84,14 +87,24 @@ const SamplePublicationCard: React.FC<SamplePublicationCardProps> = ({
           </div>
         </div>
 
-        {/* Map Thumbnail */}
-        <div className="mb-4">
-          <PublicationMapThumbnail
-            coordinates={publication.coordinates}
-            height="100px"
-            className="w-full"
-          />
-        </div>
+        {/* Map Thumbnail - Solo para trabajos presenciales */}
+        {publication.modality === 'presencial' ? (
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-2">
+              <MapPin size={14} className="text-gray-500" />
+              <span className="text-xs text-gray-600 font-medium">Ubicación</span>
+            </div>
+            <PublicationMapThumbnail
+              coordinates={publication.coordinates}
+              height="100px"
+              className="w-full"
+            />
+          </div>
+        ) : (
+          <div className="mb-4">
+            <RemoteWorkInfo variant="compact" />
+          </div>
+        )}
 
         {/* Seller Info */}
         <div className="border-t border-gray-100 pt-4">

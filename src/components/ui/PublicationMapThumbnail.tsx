@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
+import { MapPin } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 // Importar iconos de Leaflet
@@ -46,7 +47,10 @@ export const PublicationMapThumbnail: React.FC<IPublicationMapThumbnailProps> = 
   if (!isValidCoordinates) {
     return (
       <div className={`bg-gray-100 rounded-lg flex items-center justify-center ${className}`} style={{ height }}>
-        <span className="text-xs text-gray-500">Sin ubicación</span>
+        <div className="text-center">
+          <MapPin size={16} className="text-gray-400 mx-auto mb-1" />
+          <span className="text-xs text-gray-500">Sin ubicación</span>
+        </div>
       </div>
     );
   }

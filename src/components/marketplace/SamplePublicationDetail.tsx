@@ -19,6 +19,9 @@ import {
 import { getSamplePublicationById } from '../../data/samplePublications';
 import Button from '../ui/Button';
 import PublicationMapView from '../ui/PublicationMapView';
+import ModalityBadge from '../ui/ModalityBadge';
+import RemoteWorkInfo from '../ui/RemoteWorkInfo';
+import PresentialWorkInfo from '../ui/PresentialWorkInfo';
 
 const SamplePublicationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -168,6 +171,7 @@ const SamplePublicationDetail: React.FC = () => {
                     <span className={`text-sm px-3 py-1 rounded-full font-medium ${getConditionColor(publication.condition)}`}>
                       {publication.condition}
                     </span>
+                    <ModalityBadge modality={publication.modality} size="md" />
                   </div>
 
                   {/* Image Navigation */}
@@ -286,17 +290,29 @@ const SamplePublicationDetail: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Location Map */}
-                <div className="mb-6">
-                  <h2 className="text-lg font-semibold mb-3">Ubicación</h2>
-                  <PublicationMapView
-                    coordinates={publication.coordinates}
-                    title={publication.title}
-                    location={publication.location}
-                    height="300px"
-                    className="w-full"
-                  />
-                </div>
+                {/* Location Map - Solo para trabajos presenciales */}
+                {publication.modality === 'presencial' ? (
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold mb-3">Ubicación</h2>
+                    <PresentialWorkInfo 
+                      location={publication.location} 
+                      variant="detailed" 
+                      className="mb-4"
+                    />
+                    <PublicationMapView
+                      coordinates={publication.coordinates}
+                      title={publication.title}
+                      location={publication.location}
+                      height="300px"
+                      className="w-full"
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold mb-3">Modalidad de Trabajo</h2>
+                    <RemoteWorkInfo variant="detailed" />
+                  </div>
+                )}
 
                 {/* Product Details */}
                 <div className="bg-gray-50 p-4 rounded-lg">
@@ -309,6 +325,12 @@ const SamplePublicationDetail: React.FC = () => {
                     <div>
                       <span className="text-gray-600">Condición:</span>
                       <span className="ml-2 font-medium">{publication.condition}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Modalidad:</span>
+                      <span className="ml-2 font-medium">
+                        <ModalityBadge modality={publication.modality} size="sm" />
+                      </span>
                     </div>
                     <div>
                       <span className="text-gray-600">Ubicación:</span>
