@@ -22,6 +22,7 @@ import PublicationMapView from '../ui/PublicationMapView';
 import ModalityBadge from '../ui/ModalityBadge';
 import RemoteWorkInfo from '../ui/RemoteWorkInfo';
 import PresentialWorkInfo from '../ui/PresentialWorkInfo';
+import { KeywordsList } from '../ui/KeywordsDisplay';
 
 const SamplePublicationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -289,6 +290,21 @@ const SamplePublicationDetail: React.FC = () => {
                     {publication.description}
                   </p>
                 </div>
+
+                {/* Keywords */}
+                {publication.keywords && publication.keywords.length > 0 && (
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold mb-3">Palabras Clave</h2>
+                    <KeywordsList 
+                      keywords={publication.keywords} 
+                      maxDisplay={15}
+                      showAll={true}
+                    />
+                    <p className="text-sm text-gray-500 mt-2">
+                      Estas palabras clave ayudan a que otros usuarios encuentren esta publicación cuando buscan servicios similares.
+                    </p>
+                  </div>
+                )}
 
                 {/* Location Map - Solo para trabajos presenciales */}
                 {publication.modality === 'presencial' ? (

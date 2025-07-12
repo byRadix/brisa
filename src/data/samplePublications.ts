@@ -14,6 +14,7 @@ export interface SamplePublication {
     longitude: number;
   };
   modality: PublicationModality; // Nueva propiedad para modalidad de trabajo
+  keywords: string[]; // Palabras clave para sistema de notificaciones personalizadas
   images: string[];
   seller: {
     id: string;
@@ -37,6 +38,11 @@ export const samplePublications: SamplePublication[] = [
       longitude: -99.1332
     },
     modality: "presencial", // Venta de producto físico requiere presencia
+    keywords: [
+      "iphone", "iphone 13", "iphone 13 pro max", "apple", "smartphone", "móvil", "celular",
+      "pantalla", "reparación", "técnico", "servicio técnico", "apple store", "mojado", "agua",
+      "piscina", "daño por agua", "pantalla negra", "encendido", "llamadas", "electrónicos"
+    ],
     images: [
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -61,6 +67,11 @@ export const samplePublications: SamplePublication[] = [
       longitude: -1.7017
     },
     modality: "presencial", // Servicio de hostelería requiere presencia física
+    keywords: [
+      "camarero", "cocinero", "chef", "hostelería", "restaurante", "catering", "eventos",
+      "cumpleaños", "barbacoa", "pizza", "horno", "servicio", "domingo", "urgente",
+      "trabajo temporal", "evento", "fiesta", "comida", "gastronomía", "servicio de mesa"
+    ],
     images: [
       "https://www.globalmarketingdirecto.com/images/2019/HOSTELERIA.jpg",
       "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202502/21/00119860002658____4__1200x1200.jpg"
@@ -85,6 +96,12 @@ export const samplePublications: SamplePublication[] = [
       longitude: -99.1332
     },
     modality: "remoto", // Desarrollo de software se puede hacer remotamente
+    keywords: [
+      "desarrollador", "frontend", "react", "typescript", "javascript", "programador",
+      "desarrollo web", "e-commerce", "tienda online", "componentes", "api", "apis",
+      "optimización", "rendimiento", "proyecto", "remoto", "teletrabajo", "freelance",
+      "programación", "web", "front-end", "front end", "reactjs", "ts", "js"
+    ],
     images: [
       "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -109,6 +126,12 @@ export const samplePublications: SamplePublication[] = [
       longitude: -99.1332
     },
     modality: "remoto", // Diseño gráfico se puede hacer remotamente
+    keywords: [
+      "diseñador", "diseño gráfico", "branding", "identidad visual", "logo", "logotipo",
+      "paleta de colores", "tipografía", "tipografías", "startup", "empresa", "marca",
+      "diseño moderno", "creativo", "ilustrador", "photoshop", "illustrator", "figma",
+      "diseño", "gráfico", "visual", "creatividad", "remoto", "freelance"
+    ],
     images: [
       "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -133,6 +156,12 @@ export const samplePublications: SamplePublication[] = [
       longitude: -99.1332
     },
     modality: "presencial", // Clases particulares requieren presencia física
+    keywords: [
+      "profesor", "inglés", "inglés nativo", "clases particulares", "tutor", "maestro",
+      "educación", "idiomas", "conversación", "exámenes", "c2", "nivel c2", "nativo",
+      "preparación", "internacional", "toefl", "ielts", "cambridge", "certificación",
+      "enseñanza", "aprendizaje", "idioma", "inglés americano", "inglés británico"
+    ],
     images: [
       "https://images.pexels.com/photos/4778661/pexels-photo-4778661.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/4778660/pexels-photo-4778660.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -157,6 +186,12 @@ export const samplePublications: SamplePublication[] = [
       longitude: -99.1332
     },
     modality: "remoto", // Redacción de contenido se puede hacer remotamente
+    keywords: [
+      "redactor", "contenido", "web", "seo", "blog", "artículos", "escritor", "copywriter",
+      "marketing", "tecnología", "inteligencia artificial", "ia", "ai", "desarrollo web",
+      "tendencias", "tecnológicas", "palabras", "texto", "creativo", "optimización",
+      "contenido digital", "redacción", "escritura", "blogger", "content writer", "remoto"
+    ],
     images: [
       "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/3183154/pexels-photo-3183154.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -181,6 +216,12 @@ export const samplePublications: SamplePublication[] = [
       longitude: -103.3496
     },
     modality: "presencial", // Reparaciones requieren presencia física
+    keywords: [
+      "plomero", "fontanero", "fontanería", "reparación", "fuga", "agua", "baño",
+      "tubería", "urgente", "hoy", "profesional", "servicio", "manitas", "hogar",
+      "casa", "reparaciones", "mantenimiento", "instalación", "desatascar",
+      "desatrancar", "fuga de agua", "fontanería urgente", "plomería", "servicios"
+    ],
     images: [
       "https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/439392/pexels-photo-439392.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -233,6 +274,7 @@ export const filterPublications = (filters: {
   maxPrice?: number;
   minPrice?: number;
   location?: string;
+  keywords?: string[]; // Nuevo filtro por palabras clave
 }): SamplePublication[] => {
   return samplePublications.filter(pub => {
     if (filters.modality && pub.modality !== filters.modality) return false;
@@ -240,6 +282,106 @@ export const filterPublications = (filters: {
     if (filters.maxPrice && pub.price > filters.maxPrice) return false;
     if (filters.minPrice && pub.price < filters.minPrice) return false;
     if (filters.location && !pub.location.toLowerCase().includes(filters.location.toLowerCase())) return false;
+    
+    // Filtro por palabras clave
+    if (filters.keywords && filters.keywords.length > 0) {
+      const hasMatchingKeyword = filters.keywords.some(keyword =>
+        pub.keywords.some(pubKeyword =>
+          pubKeyword.toLowerCase().includes(keyword.toLowerCase())
+        )
+      );
+      if (!hasMatchingKeyword) return false;
+    }
+    
     return true;
+  });
+};
+
+// Funciones de utilidad para el sistema de palabras clave
+
+/**
+ * Busca publicaciones que coincidan con las palabras clave proporcionadas
+ * @param keywords Array de palabras clave a buscar
+ * @param exactMatch Si es true, busca coincidencias exactas; si es false, busca coincidencias parciales
+ * @returns Array de publicaciones que coinciden con las palabras clave
+ */
+export const searchPublicationsByKeywords = (
+  keywords: string[],
+  exactMatch: boolean = false
+): SamplePublication[] => {
+  return samplePublications.filter(pub => {
+    return keywords.some(keyword => {
+      const lowerKeyword = keyword.toLowerCase();
+      return pub.keywords.some(pubKeyword => {
+        const lowerPubKeyword = pubKeyword.toLowerCase();
+        return exactMatch 
+          ? lowerPubKeyword === lowerKeyword
+          : lowerPubKeyword.includes(lowerKeyword) || lowerKeyword.includes(lowerPubKeyword);
+      });
+    });
+  });
+};
+
+/**
+ * Obtiene todas las palabras clave únicas de todas las publicaciones
+ * @returns Array de palabras clave únicas
+ */
+export const getAllUniqueKeywords = (): string[] => {
+  const allKeywords = samplePublications.flatMap(pub => pub.keywords);
+  return [...new Set(allKeywords)].sort();
+};
+
+/**
+ * Obtiene las palabras clave más populares (más frecuentes)
+ * @param limit Número máximo de palabras clave a retornar
+ * @returns Array de palabras clave ordenadas por frecuencia
+ */
+export const getMostPopularKeywords = (limit: number = 20): Array<{keyword: string, count: number}> => {
+  const keywordCount: { [key: string]: number } = {};
+  
+  samplePublications.forEach(pub => {
+    pub.keywords.forEach(keyword => {
+      keywordCount[keyword] = (keywordCount[keyword] || 0) + 1;
+    });
+  });
+  
+  return Object.entries(keywordCount)
+    .map(([keyword, count]) => ({ keyword, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit);
+};
+
+/**
+ * Obtiene sugerencias de palabras clave basadas en un término de búsqueda
+ * @param searchTerm Término de búsqueda
+ * @param limit Número máximo de sugerencias
+ * @returns Array de sugerencias de palabras clave
+ */
+export const getKeywordSuggestions = (searchTerm: string, limit: number = 10): string[] => {
+  const allKeywords = getAllUniqueKeywords();
+  const lowerSearchTerm = searchTerm.toLowerCase();
+  
+  return allKeywords
+    .filter(keyword => keyword.toLowerCase().includes(lowerSearchTerm))
+    .slice(0, limit);
+};
+
+/**
+ * Verifica si una publicación coincide con las alertas de palabras clave de un usuario
+ * @param publication Publicación a verificar
+ * @param userKeywords Array de palabras clave del usuario
+ * @returns true si hay coincidencia, false en caso contrario
+ */
+export const checkPublicationMatchesUserKeywords = (
+  publication: SamplePublication,
+  userKeywords: string[]
+): boolean => {
+  if (userKeywords.length === 0) return false;
+  
+  return userKeywords.some(userKeyword => {
+    const lowerUserKeyword = userKeyword.toLowerCase();
+    return publication.keywords.some(pubKeyword =>
+      pubKeyword.toLowerCase().includes(lowerUserKeyword)
+    );
   });
 };

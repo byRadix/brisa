@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Star, Calendar } from 'lucide-react';
+import { MapPin, Star, Calendar, Tag } from 'lucide-react';
 import { SamplePublication } from '../../data/samplePublications';
 import PublicationMapThumbnail from '../ui/PublicationMapThumbnail';
 import ModalityBadge from '../ui/ModalityBadge';
 import RemoteWorkInfo from '../ui/RemoteWorkInfo';
+import { KeywordsBadges } from '../ui/KeywordsDisplay';
 
 interface SamplePublicationCardProps {
   publication: SamplePublication;
@@ -74,6 +75,21 @@ const SamplePublicationCard: React.FC<SamplePublicationCardProps> = ({
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">
           {publication.description}
         </p>
+
+        {/* Keywords */}
+        {publication.keywords && publication.keywords.length > 0 && (
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Tag size={14} className="text-gray-500" />
+              <span className="text-xs text-gray-600 font-medium">Palabras clave</span>
+            </div>
+            <KeywordsBadges 
+              keywords={publication.keywords} 
+              maxDisplay={4}
+              className="mb-3"
+            />
+          </div>
+        )}
 
         {/* Location and Date */}
         <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
