@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Users, Tag, Star, ChevronRight, DollarSign, MessageSquare } from 'lucide-react';
+import { Search, Users, Tag, Star, ChevronRight, DollarSign, MessageSquare, ArrowDown } from 'lucide-react';
 import Button from '../components/ui/Button';
-import HeroSection from '../components/sections/HeroSection';
+import ProfessionConverter from '../components/ui/ProfessionConverter';
 
 const HomePage: React.FC = () => {
   const categories = [
@@ -39,8 +39,46 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section with Featured Image and Carousel */}
-      <HeroSection />
+      {/* Hero Section - Full Screen with Animation */}
+      <section className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+        <ProfessionConverter />
+        
+        {/* Scroll Down Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="flex flex-col items-center text-white/80">
+            <span className="text-sm mb-2">Descubre más</span>
+            <ArrowDown className="w-6 h-6" />
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Conecta Ideas con Profesionales
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Transforma tus ideas en realidad con los mejores freelancers del mundo
+          </p>
+          <div className="inline-flex flex-col sm:flex-row gap-4">
+            <Link to="/marketplace">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                Explorar Servicios
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
+                Únete como Freelancer
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* How it Works Section */}
       <section className="py-16 md:py-24 bg-gray-50">
